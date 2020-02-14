@@ -1,0 +1,20 @@
+---
+- name:  CREATE NEW LINUX USER
+  hosts: "{{ tower_inventory }}"
+  gather_facts: yes
+
+  
+  tasks: 
+    - name: ADD NEW USER {{server_username }}
+      user:
+        name: "{{ server_username }}"
+        shell: /bin/bash
+        password: "{{ user_password | password_hash('sha512') }}"
+        groups: 
+          - developers
+          - wheel
+        append: yes
+ 
+    
+
+    

@@ -1,0 +1,3 @@
+interface_name: Ethernet2
+access_vlan: 20
+port_enabled: false

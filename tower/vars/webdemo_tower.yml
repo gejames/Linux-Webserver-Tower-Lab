@@ -1,0 +1,40 @@
+webdemo:
+  organization: "Default"
+  project:
+    name: "Linux Webdemo Project"
+    scm_url: https://github.com/gejames/win_webserver_tower_lab.git
+  inventory_network:
+    name: "Linux Webdemo Network Inventory"
+    group: "Linux Webdemo_net_group"
+    switch_hostname: "switch1"
+    switch_ipaddress: "192.168.60.15"
+    switch_portname: "Ethernet2"
+    vlan: "20"
+  inventory_winserver:
+    name: "Linux Webdemo Winserver Inventory"
+    group: "Linux Webdemo_winserver_group"
+    winserver_hostname: "WIN2016SERVER"
+    winserver_ipaddress: "192.168.60.41"
+  credential:
+    switch:
+      name: "Linux Webdemo Switch Login Credentials"
+      username: "arista"
+      password: "arista"
+    winserver:
+      name: "Linux Webdemo Winserver Login Credentials"
+      username: "vagrant"
+      password: "vagrant"
+  user:
+      first_name: Jon
+      surname:  Smith
+      username: jonsmith
+  report:
+      email: 
+  templates:
+      enable_port: "Linux Webdemo Enable Switch Port"  
+      disable_port: "Linux Webdemo Disable Switch Port"
+      harden_win: "Linux Webdemo Harden Server"
+      enable_iis: "Linux Webdemo Add IIS to Webserver"
+      new_user: "Linux Webdemo Add Winserver User"
+      run_report: "Linux Webdemo Send New Server Report"
+      workflow: "Linux Webdemo Workflow"

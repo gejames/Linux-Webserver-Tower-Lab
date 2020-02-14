@@ -1,0 +1,18 @@
+- project: {{ webdemo.project.name }}
+  success: 
+   - job_template: {{ webdemo.templates.enable_port }}
+     success: 
+     - job_template: {{ webdemo.templates.harden_win }}
+       failure:
+       - job_template: {{ webdemo.templates.disable_port }}
+       success:
+       -  job_template: {{ webdemo.templates.enable_iis}}
+          failure:
+          - job_template: {{ webdemo.templates.disable_port }}
+          success:
+          - job_template: {{ webdemo.templates.new_user }}
+            failure:
+            - job_template: {{ webdemo.templates.disable_port }}
+            always:
+            - job_template: {{ webdemo.templates.run_report }}
+            

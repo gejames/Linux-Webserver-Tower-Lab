@@ -1,0 +1,2 @@
+---
+nginx_test_message: 'NGINX was installed by Ansible'

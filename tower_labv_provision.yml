@@ -1,0 +1,228 @@
+# This playbook will create all the assests in Ansible Tower for the lab.
+
+# Edit the variables in tower/vars/webdemo_tower.yml
+
+---
+- name: SETUP TOWER FOR DEMO
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    tower:
+      cli_config: "./tower/tower-cli.cfg"
+      state: present
+          
+  vars_prompt:
+
+    - name: tower_username
+      prompt: "What is the Tower username?"
+      private: no
+
+    - name: tower_password
+      prompt: "What is the Tower password?"
+       
+  tasks:
+
+    - include_vars: ./tower/vars/webdemo_tower.yml
+
+    - name: CREATE TOWER CREDENTIALS FILE
+      template:
+        src: ./tower/templates/tower-cli.j2
+        dest: ./tower/tower-cli.cfg
+
+    - name: CREATE SWITCH SURVEY FILE
+      template:
+        src: ./tower/templates/switch_port_survey.j2
+        dest: ./tower/surveys/switch_port.json
+
+    - name: CREATE WORKFLOW SURVEY FILE
+      template:
+        src: ./tower/templates/workflow_survey.j2
+        dest: ./tower/surveys/workflow.json
+
+    - name: CREATE WORKFLOW SCHEMA FILE FROM JINJA2 TEMPLATE
+      template:
+        src: ./tower/templates/workflow_schema.j2
+        dest: ./tower/schema/workflow.json
+       
+    - name: ADD WEBSERVER PROJECT FROM GIT
+      tower_project:
+        name: "{{ webdemo.project.name }}"
+        organization: "{{ webdemo.organization }}"
+        scm_type: git
+        scm_url: "{{ webdemo.project.scm_url }}"
+        scm_update_on_launch: true
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE INVENTORY FOR CISCO SWITCH
+      tower_inventory: 
+        name: "{{ webdemo.inventory_network.name }}"
+        organization: "{{ webdemo.organization }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE INVENTORY GROUP FOR SWITCH
+      tower_group:
+        name: "{{ webdemo.inventory_network.group }}"
+        inventory: "{{ webdemo.inventory_network.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE HOST FOR SWITCH
+      tower_host:
+        name: "{{ webdemo.inventory_network.switch_hostname }}"
+        inventory: "{{ webdemo.inventory_network.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+        variables:
+           ansible_network_os: eos
+           ansible_host: "{{ webdemo.inventory_network.switch_ipaddress }}"
+           
+
+    - name: CREATE INVENTORY FOR WINSERVER
+      tower_inventory: 
+        name: "{{ webdemo.inventory_winserver.name }}"
+        organization: "{{ webdemo.organization }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE INVENTORY GROUP FOR WEBSERVER
+      tower_group:
+        name: "{{ webdemo.inventory_winserver.name }}"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE HOST FOR WIN SERVER
+      tower_host:
+        name: "{{ webdemo.inventory_winserver.winserver_hostname }}"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+        variables:
+          ansible_host: "{{ webdemo.inventory_winserver.winserver_ipaddress }}"
+          ansible_connection: winrm
+          ansible_winrm_server_cert_validation: ignore
+
+    - name: CREATE CREDENTIAL FOR SWITCH
+      tower_credential:
+        name: "{{ webdemo.credential.switch.name }}"
+        organization: "{{ webdemo.organization }}"
+        kind: ssh
+        username: "{{ webdemo.credential.switch.username }}"
+        password: "{{ webdemo.credential.switch.password }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE CREDENTIAL FOR WINDOWS SERVER
+      tower_credential:
+        name: "{{ webdemo.credential.winserver.name }}"
+        organization: "Default"
+        kind: ssh
+        username: "{{ webdemo.credential.winserver.username }}"
+        password: "{{ webdemo.credential.winserver.password }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE '{{ webdemo.templates.enable_port }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.enable_port }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_network.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "config_switch_port.yml"
+        credential: "{{ webdemo.credential.switch.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: yes
+        survey_spec: "{{ lookup('file', 'tower/surveys/switch_port.json') }}"
+        extra_vars_path: ./tower/vars/enable_switch_port.yml
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: CREATE '{{ webdemo.templates.disable_port }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.disable_port }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_network.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "config_switch_port.yml"
+        credential: "{{ webdemo.credential.switch.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: yes
+        survey_spec: "{{ lookup('file', 'tower/surveys/switch_port.json') }}"
+        extra_vars_path: ./tower/vars/disable_switch_port.yml
+        tower_config_file: "{{ tower.cli_config }}"
+               
+    - name: CREATE '{{ webdemo.templates.harden_win }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.harden_win }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_os_harden.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: no
+        tower_config_file: "{{ tower.cli_config }}"  
+
+    - name: CREATE '{{ webdemo.templates.enable_iis }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.enable_iis }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_install_iis.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: no
+        tower_config_file: "{{ tower.cli_config }}"  
+
+    - name: CREATE '{{ webdemo.templates.new_user }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.new_user }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_new_user.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: no
+        tower_config_file: "{{ tower.cli_config }}"  
+
+    - name: CREATE '{{ webdemo.templates.run_report }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.run_report }}"
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "report.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: no
+        tower_config_file: "{{ tower.cli_config }}"  
+    
+    - name: CREATE '{{ webdemo.templates.workflow }}'
+      tower_workflow_template:
+        name: "{{ webdemo.templates.workflow }}"
+        organization: "{{ webdemo.organization }}"
+        schema: "{{ lookup('file','tower/schema/workflow.json' ) }}"
+        survey_enabled: yes
+        tower_config_file: "{{ tower.cli_config }}"
+    
+    # survey is not well supported for the tower_workflow_template module.  
+    # As a workaround we will add the workflow survey via the command line tower-cli tool until survey_spec is implemented.
+    # This isn't idempotent but shoudln't break anything on multiple playbook runs.
+    # tower-cli workflow modify  --name="Test Webdemo Workflow" --survey-spec @./surveys/webdemo_workflow.json -u gejames -p ASK
+   
+    - name: ADD SURVEY TO WORKFLOW
+      shell: tower-cli workflow modify --name="{{ webdemo.templates.workflow }}" --survey-spec @./tower/surveys/workflow.json -u "{{ tower_username }}" -p "{{ tower_password }}"
+      delegate_to: localhost
+      when: tower.state == "present"
+
+    - name: REMOVE TOWER CREDENTIALS FILE
+      file: 
+        path: ./tower/tower-cli.cfg
+        state: absent
+      delegate_to: localhost
+    
+

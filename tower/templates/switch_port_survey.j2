@@ -1,0 +1,30 @@
+{
+  "name": "",
+  "description": "",
+  "spec": [
+    {
+      "question_name": "What switch interface is the server on",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "interface_name",
+      "min": 0,
+      "max": 1024,
+      "default": "{{ webdemo.inventory_network.switch_hostname }}",
+      "choices": ""
+    },
+    {
+      "question_name": "What VLAN will the server be on?",
+      "question_description": "",
+      "required": true,
+      "type": "integer",
+      "variable": "access_vlan",
+      "min": 0,
+      "max": 100,
+      "default": {{ webdemo.inventory_network.vlan }},
+      "choices": "",
+      "new_question": true
+    }
+  ]
+}
+

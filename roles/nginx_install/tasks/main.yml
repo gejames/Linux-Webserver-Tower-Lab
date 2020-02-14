@@ -1,0 +1,29 @@
+---
+
+- name: MAKE SURE THE LATEST VERSION OF NGINX IS INSTALLED
+  yum:
+    name: nginx
+    state: latest
+
+
+- name: Copy using inline content
+  copy:
+    content: "{{ nginx_test_message }}"
+    dest: /usr/share/nginx/html/index.html
+
+- name: MAKE SURE NGINX SERVICE IS RUNNING
+  systemd:
+    state: started
+    name: nginx
+
+- name: ENABLE HTTP ON FIREWALL
+  firewalld:  
+    zone: public
+    service: http
+    permanent: yes
+    state: enabled
+    
+- name: RESTART FIREWALLD
+  systemd:
+    state: restarted
+    name: firewalld

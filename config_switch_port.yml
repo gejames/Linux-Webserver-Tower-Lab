@@ -1,0 +1,43 @@
+---
+- name: CONFIGURE CISCO SWITCH PORT
+  hosts: '{{ tower_network_inventory }}'
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    interface_name: Ethernet2
+    access_vlan: 20
+    port_enabled: false
+
+
+  tasks:
+    
+     - name: CONFIGURE AND ENABLE PORT { interface_name }}
+       block: 
+       
+         - name: CONFIGURE L2 PORT
+           eos_l2_interfaces:
+             config: 
+                - name: "{{ interface_name }}"
+                  access:
+                    vlan: 20
+             state: replaced
+
+         - name: ENABLE PORT {{ interface_name }}
+           eos_config:
+             lines:
+               - NO SHUTDOWN
+               - description Enabled and Configured by Ansible
+             parents: interface {{ interface_name }}
+
+       when: port_enabled
+
+
+     - name: DISABLE L2 PORT
+       eos_config:
+         lines:
+           - SHUTDOWN
+           - description Disabled by Ansible
+         parents: interface {{ interface_name }}
+       when: not port_enabled
+

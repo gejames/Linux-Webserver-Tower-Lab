@@ -1,0 +1,109 @@
+{
+  "name": "",
+  "description": "",
+  "spec": [
+    {
+      "question_name": "WHAT IS THE SWITCH HOSTNAME?",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "tower_network_inventory",
+      "min": 0,
+      "max": 1024,
+      "default": "switch1",
+      "choices": ""
+    },
+    {
+      "question_name": "WHAT SWITCHPORT IS THE SERVER ON",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "interface_name",
+      "min": 0,
+      "max": 1024,
+      "default": "Ethernet2",
+      "choices": ""
+    },
+    {
+      "question_name": "WHAT VLAN WILL THE SERVER BE ON",
+      "question_description": "",
+      "required": true,
+      "type": "integer",
+      "variable": "access_vlan",
+      "min": 0,
+      "max": 100,
+      "default": 20,
+      "choices": "",
+      "new_question": true
+    },
+    {
+      "question_name": "WHAT IS THE HOSTNAME OF THE WINDOWS WEBSERVER",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "tower_win_inventory",
+      "min": 0,
+      "max": 1024,
+      "default": "WIN2016SERVER",
+      "choices": ""
+    },
+    {
+      "question_name": "NEW SERVER ADMIN USERNAME",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "server_username",
+      "min": 0,
+      "max": 1024,
+      "default": "jonsmith",
+      "choices": ""
+    },
+    {
+      "question_name": "USer First Name",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "user_firstname",
+      "min": 0,
+      "max": 1024,
+      "default": "Smith",
+      "choices": "",
+      "new_question": true
+    },
+    {
+      "question_name": "User last name",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "user_surname",
+      "min": 0,
+      "max": 1024,
+      "default": "Smith",
+      "choices": "",
+      "new_question": true
+    },
+    {
+      "question_name": "NEW USER PASSWORD",
+      "question_description": "",
+      "required": true,
+      "type": "password",
+      "variable": "user_password",
+      "min": 0,
+      "max": 32,
+      "default": "",
+      "choices": "",
+      "new_question": true
+    },
+    {
+      "question_name": "SEND REPORT TO EMAIL ADDRESS",
+      "question_description": "",
+      "required": true,
+      "type": "text",
+      "variable": "sendto_email",
+      "min": 0,
+      "max": 1024,
+      "default": "",
+      "choices": ""
+    }
+  ]
+}

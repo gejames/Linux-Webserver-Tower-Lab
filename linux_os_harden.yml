@@ -1,0 +1,19 @@
+---
+- name: Linux OS Hardening
+  hosts: '{{ tower_inventory }}'
+  gather_facts: false
+
+  vars:
+    
+
+  role:
+   - dev-sec.os-hardening
+     
+    
+    
+    
+    
+    
+    
+    
+    

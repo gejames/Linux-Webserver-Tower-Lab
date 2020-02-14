@@ -1,0 +1,9 @@
+---
+- name: GENERATE AND SEND REPORT
+  hosts: '{{ tower_inventory }}'
+  gather_facts: false
+
+  roles: 
+    - report
+    
+  

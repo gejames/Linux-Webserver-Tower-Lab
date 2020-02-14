@@ -1,0 +1,13 @@
+---
+- name: Send Email with Report
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "{{ gmail_account }}"
+    password: "{{ gmail_account_password }}"
+    to: "{{ sendto_email }}"
+    subject: New Server Enabled {{ tower_inventory }}
+    body: "{{ lookup('template', 'templates/mail_body.j2') }}"
+  delegate_to: localhost
+             
+             

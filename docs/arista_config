@@ -1,0 +1,16 @@
+
+!
+hostname switch1
+spanning-tree mode mstp
+aaa authorization exec default local
+no aaa root
+username arista privilege 15 secret arista
+!
+interface Management1
+   ip address 192.168.60.15/24
+!
+ip route 0.0.0.0/0 192.168.60.1
+!
+no ip routing
+!
+end

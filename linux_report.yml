@@ -1,0 +1,11 @@
+---
+- name: GENERATE AND SEND REPORT
+  hosts: localhosts
+  gather_facts: false
+
+
+  tasks:
+    - include_role:
+         name: report
+      when: server_os == "linux"
+  

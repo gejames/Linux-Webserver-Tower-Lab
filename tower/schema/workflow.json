@@ -1,0 +1,18 @@
+- project: Linux Webdemo Project
+  success: 
+   - job_template: Linux Webdemo Enable Switch Port
+     success: 
+     - job_template: Linux Webdemo Harden Winserver OS
+       failure:
+       - job_template: Linux Webdemo Disable Switch Port
+       success:
+       -  job_template: Linux Webdemo Add IIS to Webserver
+          failure:
+          - job_template: Linux Webdemo Disable Switch Port
+          success:
+          - job_template: Linux Webdemo Add Winserver User
+            failure:
+            - job_template: Linux Webdemo Disable Switch Port
+            always:
+            - job_template: Linux Webdemo Send New Server Report
+            

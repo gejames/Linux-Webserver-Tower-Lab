@@ -1,0 +1,154 @@
+---
+- name: SETUP TOWER FOR DEMO
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    tower:
+      cli_config: "./tower/tower-cli.cfg"
+      state: absent
+    
+          
+  vars_prompt:
+
+    - name: tower_username
+      prompt: "What is the Tower username?"
+      private: no
+
+    - name: tower_password
+      prompt: "What is the Tower password?"
+    
+    
+       
+  tasks:
+
+    - include_vars: ./tower/vars/webdemo_tower.yml
+
+    - name: CREATE TOWER CREDENTIALS FILE FROM JINJA2 TEMPLATE
+      template:
+        src: ./tower/templates/tower-cli.j2
+        dest: ./tower/tower-cli.cfg
+
+    - name: REMOVE '{{ webdemo.templates.workflow }}'
+      tower_workflow_template:
+        name: "{{ webdemo.templates.workflow }}"
+        organization: "{{ webdemo.organization }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: REMOVE '{{ webdemo.templates.enable_port }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.enable_port }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_network.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "cisco_config_switch_port.yml"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+      ignore_errors: true
+
+    - name: REMOVE '{{ webdemo.templates.disable_port }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.disable_port }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_network.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "cisco_config_switch_port.yml"
+        credential: "{{ webdemo.credential.switch.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+      ignore_errors: true
+               
+    - name: REMOVE '{{ webdemo.templates.harden_win }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.harden_win }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_os_harden.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"  
+      ignore_errors: true
+
+    - name: REMOVE '{{ webdemo.templates.enable_iis }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.enable_iis }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_install_iis.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"  
+      ignore_errors: true
+
+    - name: REMOVE '{{ webdemo.templates.new_user }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.new_user }}"  
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_new_user.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        survey_enabled: no
+        tower_config_file: "{{ tower.cli_config }}"  
+      ignore_errors: true
+
+    - name: REMOVE '{{ webdemo.templates.run_report }}' TEMPLATE
+      tower_job_template:
+        name: "{{ webdemo.templates.run_report }}"
+        job_type: "run"
+        inventory: "{{ webdemo.inventory_winserver.name }}"
+        project: "{{ webdemo.project.name }}"
+        playbook: "win_new_user.yml"
+        credential: "{{ webdemo.credential.winserver.name }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"  
+      ignore_errors: true
+    
+    - name: REMOVE WEBSERVER PROJECT FROM GIT
+      tower_project:
+        name: "{{ webdemo.project.name }}"
+        organization: "{{ webdemo.organization }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: REMOVE INVENTORY FOR CISCO SWITCH
+      tower_inventory: 
+        name: "{{ webdemo.inventory_network.name }}"
+        organization: "{{ webdemo.organization }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: REMOVE INVENTORY FOR WINSERVER
+      tower_inventory: 
+        name: "{{ webdemo.inventory_winserver.name }}"
+        organization: "{{ webdemo.organization }}"
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: REMOVE CREDENTIAL FOR SWITCH
+      tower_credential:
+        name: "{{ webdemo.credential.switch.name }}"
+        organization: "{{ webdemo.organization }}"
+        kind: ssh
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: REMOVE CREDENTIAL FOR WINDOWS SERVER
+      tower_credential:
+        name: "{{ webdemo.credential.winserver.name }}"
+        organization: "Default"
+        kind: ssh
+        state: "{{ tower.state }}"
+        tower_config_file: "{{ tower.cli_config }}"
+
+    - name: REMOVE TOWER CREDENTIALS FILE
+      file: 
+        path: ./tower-cli.cfg
+        state: absent
+      delegate_to: localhost
+    
+
