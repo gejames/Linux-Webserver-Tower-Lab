@@ -156,7 +156,7 @@
         job_type: "run"
         inventory: "{{ webdemo.inventory_server.name }}"
         project: "{{ webdemo.project.name }}"
-        playbook: "win_os_harden.yml"
+        playbook: "linux_os_harden.yml"
         credential: "{{ webdemo.credentials.server.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no
