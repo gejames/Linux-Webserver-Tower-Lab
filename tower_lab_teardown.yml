@@ -54,7 +54,7 @@
         inventory: "{{ webdemo.inventory_network.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "cisco_config_switch_port.yml"
-        credential: "{{ webdemo.credential.switch.name }}"
+        credential: "{{ webdemo.credentials.switch.name }}"
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"
       ignore_errors: true
@@ -66,7 +66,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_os_harden.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.winserver.name }}"
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"  
       ignore_errors: true
@@ -78,7 +78,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_install_iis.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.winserver.name }}"
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"  
       ignore_errors: true
@@ -90,7 +90,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_new_user.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.winserver.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no
         tower_config_file: "{{ tower.cli_config }}"  
@@ -103,7 +103,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_new_user.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.winserver.name }}"
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"  
       ignore_errors: true
@@ -131,7 +131,7 @@
 
     - name: REMOVE CREDENTIAL FOR SWITCH
       tower_credential:
-        name: "{{ webdemo.credential.switch.name }}"
+        name: "{{ webdemo.credentials.switch.name }}"
         organization: "{{ webdemo.organization }}"
         kind: ssh
         state: "{{ tower.state }}"
@@ -139,7 +139,7 @@
 
     - name: REMOVE CREDENTIAL FOR WINDOWS SERVER
       tower_credential:
-        name: "{{ webdemo.credential.winserver.name }}"
+        name: "{{ webdemo.credentials.winserver.name }}"
         organization: "Default"
         kind: ssh
         state: "{{ tower.state }}"

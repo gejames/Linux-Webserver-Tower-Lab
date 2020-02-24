@@ -3,14 +3,9 @@
   hosts: '{{ tower_inventory }}'
   gather_facts: false
 
-  vars:
-     tower_hosts_server: all
-
-
-  tasks:
-    - include_role:
-         name: nginx_install
-      when: server_os == 'linux'
+  roles:
+   - nginx_install
+   
 
    
 

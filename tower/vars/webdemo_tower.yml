@@ -14,18 +14,18 @@ webdemo:
     name: "Linux Webdemo Inventory"
     group: "webdemo-server-group"
     winserver_hostname: "SERVER"
-    winserver_ipaddress: "192.168.60.41"
-  credential:
+    winserver_ipaddress: "192.168.60.146"
+  credentials:
     switch:
       name: "Linux Webdemo Switch Login Credentials"
       username: "arista"
       password: "arista"
-    winserver:
-      name: "Linux Webdemo Winserver Login Credentials"
+    server:
+      name: "Linux Webdemo Server Login Credentials"
       username: "vagrant"
       password: "vagrant"
   user:
-      first_name: Jon
+      firstname: Jon
       surname:  Smith
       username: jonsmith
   report:
@@ -33,8 +33,8 @@ webdemo:
   templates:
       enable_port: "Linux Webdemo Enable Switch Port"  
       disable_port: "Linux Webdemo Disable Switch Port"
-      harden_win: "Linux Webdemo Harden Server"
-      enable_iis: "Linux Webdemo Add IIS to Webserver"
+      harden_linux: "Linux Webdemo Harden Server"
+      enable_iis: "Linux Webdemo Add NGINX to Server"
       new_user: "Linux Webdemo Add Winserver User"
       run_report: "Linux Webdemo Send New Server Report"
       workflow: "Linux Webdemo Workflow"

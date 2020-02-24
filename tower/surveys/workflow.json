@@ -44,7 +44,7 @@
       "variable": "tower_win_inventory",
       "min": 0,
       "max": 1024,
-      "default": "WIN2016SERVER",
+      "default": "SERVER",
       "choices": ""
     },
     {
@@ -102,7 +102,7 @@
       "variable": "sendto_email",
       "min": 0,
       "max": 1024,
-      "default": "",
+      "default": "rojasautolab@gmail.com",
       "choices": ""
     }
   ]

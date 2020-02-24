@@ -107,21 +107,21 @@
 
     - name: CREATE CREDENTIAL FOR SWITCH
       tower_credential:
-        name: "{{ webdemo.credential.switch.name }}"
+        name: "{{ webdemo.credentials.switch.name }}"
         organization: "{{ webdemo.organization }}"
         kind: ssh
-        username: "{{ webdemo.credential.switch.username }}"
-        password: "{{ webdemo.credential.switch.password }}"
+        username: "{{ webdemo.credentials.switch.username }}"
+        password: "{{ webdemo.credentials.switch.password }}"
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"
 
     - name: CREATE CREDENTIAL FOR WINDOWS SERVER
       tower_credential:
-        name: "{{ webdemo.credential.winserver.name }}"
+        name: "{{ webdemo.credentials.winserver.name }}"
         organization: "Default"
         kind: ssh
-        username: "{{ webdemo.credential.winserver.username }}"
-        password: "{{ webdemo.credential.winserver.password }}"
+        username: "{{ webdemo.credentials.winserver.username }}"
+        password: "{{ webdemo.credentials.winserver.password }}"
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"
 
@@ -132,7 +132,7 @@
         inventory: "{{ webdemo.inventory_network.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "config_switch_port.yml"
-        credential: "{{ webdemo.credential.switch.name }}"
+        credential: "{{ webdemo.credentials.switch.name }}"
         state: "{{ tower.state }}"
         survey_enabled: yes
         survey_spec: "{{ lookup('file', 'tower/surveys/switch_port.json') }}"
@@ -146,7 +146,7 @@
         inventory: "{{ webdemo.inventory_network.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "config_switch_port.yml"
-        credential: "{{ webdemo.credential.switch.name }}"
+        credential: "{{ webdemo.credentials.switch.name }}"
         state: "{{ tower.state }}"
         survey_enabled: yes
         survey_spec: "{{ lookup('file', 'tower/surveys/switch_port.json') }}"
@@ -160,7 +160,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_os_harden.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.winserver.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no
         tower_config_file: "{{ tower.cli_config }}"  
@@ -172,7 +172,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_install_iis.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.winserver.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no
         tower_config_file: "{{ tower.cli_config }}"  
@@ -184,7 +184,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "win_new_user.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.server.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no
         tower_config_file: "{{ tower.cli_config }}"  
@@ -196,7 +196,7 @@
         inventory: "{{ webdemo.inventory_winserver.name }}"
         project: "{{ webdemo.project.name }}"
         playbook: "report.yml"
-        credential: "{{ webdemo.credential.winserver.name }}"
+        credential: "{{ webdemo.credentials.server.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no
         tower_config_file: "{{ tower.cli_config }}"  

@@ -2,7 +2,7 @@
   success: 
    - job_template: Linux Webdemo Enable Switch Port
      success: 
-     - job_template: Linux Webdemo Harden Winserver OS
+     - job_template: Linux Webdemo Harden Server
        failure:
        - job_template: Linux Webdemo Disable Switch Port
        success:
