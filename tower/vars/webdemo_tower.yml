@@ -2,7 +2,7 @@ webdemo:
   organization: "Default"
   project:
     name: "Linux Webdemo Project"
-    scm_url: https://github.com/gejames/win_webserver_tower_lab.git
+    scm_url: https://github.com/gejames/Linux-Webserver-Tower-Lab.git
   inventory_network:
     name: "Linux Webdemo Network Inventory"
     group: "webdemo-network-group"
@@ -10,11 +10,11 @@ webdemo:
     switch_ipaddress: "192.168.60.15"
     switch_portname: "Ethernet2"
     vlan: "20"
-  inventory_winserver:
+  inventory_server:
     name: "Linux Webdemo Inventory"
     group: "webdemo-server-group"
-    winserver_hostname: "SERVER"
-    winserver_ipaddress: "192.168.60.146"
+    server_hostname: "SERVER"
+    server_ipaddress: "192.168.60.146"
   credentials:
     switch:
       name: "Linux Webdemo Switch Login Credentials"
@@ -34,7 +34,7 @@ webdemo:
       enable_port: "Linux Webdemo Enable Switch Port"  
       disable_port: "Linux Webdemo Disable Switch Port"
       harden_linux: "Linux Webdemo Harden Server"
-      enable_iis: "Linux Webdemo Add NGINX to Server"
-      new_user: "Linux Webdemo Add Winserver User"
+      enable_nginx: "Linux Webdemo Add NGINX to Server"
+      new_user: "Linux Webdemo Add Server User"
       run_report: "Linux Webdemo Send New Server Report"
       workflow: "Linux Webdemo Workflow"

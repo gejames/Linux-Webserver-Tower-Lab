@@ -6,11 +6,11 @@
        failure:
        - job_template: Linux Webdemo Disable Switch Port
        success:
-       -  job_template: Linux Webdemo Add IIS to Webserver
+       -  job_template: Linux Webdemo Add NGINX to Server
           failure:
           - job_template: Linux Webdemo Disable Switch Port
           success:
-          - job_template: Linux Webdemo Add Winserver User
+          - job_template: Linux Webdemo Add Server User
             failure:
             - job_template: Linux Webdemo Disable Switch Port
             always:

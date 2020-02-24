@@ -2,11 +2,11 @@
   success: 
    - job_template: {{ webdemo.templates.enable_port }}
      success: 
-     - job_template: {{ webdemo.templates.harden_win }}
+     - job_template: {{ webdemo.templates.harden_linux }}
        failure:
        - job_template: {{ webdemo.templates.disable_port }}
        success:
-       -  job_template: {{ webdemo.templates.enable_iis}}
+       -  job_template: {{ webdemo.templates.enable_nginx }}
           failure:
           - job_template: {{ webdemo.templates.disable_port }}
           success:
