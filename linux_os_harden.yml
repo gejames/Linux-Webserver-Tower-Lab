@@ -6,7 +6,7 @@
   vars:
     
 
-  role:
+  roles:
    - dev-sec.os-hardening
      
     
