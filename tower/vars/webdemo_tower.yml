@@ -34,6 +34,7 @@ webdemo:
       enable_port: "Linux Webdemo Enable Switch Port"  
       disable_port: "Linux Webdemo Disable Switch Port"
       harden_linux: "Linux Webdemo Harden Server"
+      upgrade_linux: "Linux Webdemo Upgrade Packages"
       enable_nginx: "Linux Webdemo Add NGINX to Server"
       new_user: "Linux Webdemo Add Server User"
       run_report: "Linux Webdemo Send New Server Report"

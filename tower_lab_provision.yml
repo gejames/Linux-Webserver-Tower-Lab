@@ -150,13 +150,13 @@
         extra_vars_path: ./tower/vars/disable_switch_port.yml
         tower_config_file: "{{ tower.cli_config }}"
                
-    - name: CREATE '{{ webdemo.templates.harden_linux }}' TEMPLATE
+    - name: CREATE '{{ webdemo.templates.upgrade_linux }}' TEMPLATE
       tower_job_template:
-        name: "{{ webdemo.templates.harden_linux }}"  
+        name: "{{ webdemo.templates.upgrade_linux }}"  
         job_type: "run"
         inventory: "{{ webdemo.inventory_server.name }}"
         project: "{{ webdemo.project.name }}"
-        playbook: "linux_os_harden.yml"
+        playbook: "linux_yum_upgrade.yml"
         credential: "{{ webdemo.credentials.server.name }}"
         state: "{{ tower.state }}"
         survey_enabled: no

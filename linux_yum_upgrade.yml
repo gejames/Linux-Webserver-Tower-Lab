@@ -1,0 +1,12 @@
+---
+- name: UPGRADE ALL INSTALLED PACKAGES
+  hosts: '{{ tower_inventory }}'
+  gather_facts: false
+  become: true
+  
+  tasks:
+    - name: UPGRADE ALL PACKAGES
+      yum:
+        name: '*'
+        state: latest
+          

@@ -2,7 +2,7 @@
   success: 
    - job_template: {{ webdemo.templates.enable_port }}
      success: 
-     - job_template: {{ webdemo.templates.harden_linux }}
+     - job_template: {{ webdemo.templates.upgrade_linux }}
        failure:
        - job_template: {{ webdemo.templates.disable_port }}
        success:
