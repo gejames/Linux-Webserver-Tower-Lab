@@ -2,6 +2,7 @@
 - name: Linux OS Hardening
   hosts: '{{ tower_inventory }}'
   gather_facts: true
+  become: true
 
   vars:
     
