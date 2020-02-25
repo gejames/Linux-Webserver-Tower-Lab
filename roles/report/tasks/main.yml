@@ -5,7 +5,7 @@
     port: 587
     username: "{{ gmail_account }}"
     password: "{{ gmail_account_password }}"
-    to: "{{ sendto_email }}"
+    to: "{{ gmail_account }}"
     subject: New Server Enabled {{ tower_inventory }}
     body: "{{ lookup('template', 'templates/mail_body.j2') }}"
   delegate_to: localhost
