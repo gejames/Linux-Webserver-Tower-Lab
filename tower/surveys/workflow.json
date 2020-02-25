@@ -104,6 +104,18 @@
       "max": 1024,
       "default": "rojasautolab@gmail.com",
       "choices": ""
+    },
+    {
+      "question_name": "REPORT EMAIL ADDRESS PASSWORD",
+      "question_description": "",
+      "required": true,
+      "type": "password",
+      "variable": "sendto_email_password",
+      "min": 0,
+      "max": 32,
+      "default": "",
+      "choices": "",
+      "new_question": true
     }
   ]
 }

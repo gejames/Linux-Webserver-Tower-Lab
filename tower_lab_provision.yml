@@ -55,6 +55,12 @@
         state: "{{ tower.state }}"
         tower_config_file: "{{ tower.cli_config }}"
 
+    # We'll update the project just in case it already exists and we are making changes to template playbooks
+
+    - name: UPDATE PROJECT IN TOWER
+      shell: tower-cli project update --name="{{ webdemo.project.name }}" -u "{{ tower_username }}" -p "{{ tower_password }}"
+      delegate_to: localhost
+ 
     - name: CREATE INVENTORY FOR CISCO SWITCH
       tower_inventory: 
         name: "{{ webdemo.inventory_network.name }}"
