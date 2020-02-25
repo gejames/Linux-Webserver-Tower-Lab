@@ -2,6 +2,7 @@
 - name: INSTALL NGINX WEB SERVER
   hosts: '{{ tower_inventory }}'
   gather_facts: false
+  become: true
 
   roles:
    - nginx_install
