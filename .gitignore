@@ -1,1 +1,3 @@
 tower/tower-cli.cfg
+tower/schema/*.json
+tower/surveys/*.json

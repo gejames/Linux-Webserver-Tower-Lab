@@ -5,14 +5,14 @@ webdemo:
     scm_url: https://github.com/gejames/Linux-Webserver-Tower-Lab.git
   inventory_network:
     name: "Linux Webdemo Network Inventory"
-    group: "webdemo-network-group"
+    group: "switches"
     switch_hostname: "switch1"
     switch_ipaddress: "192.168.60.15"
     switch_portname: "Ethernet2"
     vlan: "20"
   inventory_server:
     name: "Linux Webdemo Inventory"
-    group: "webdemo-server-group"
+    group: "servers"
     server_hostname: "SERVER"
     server_ipaddress: "192.168.60.146"
   credentials:
