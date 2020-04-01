@@ -1,0 +1,2 @@
+[switch1]
+192.168.60.15 ansible_network_os=eos

@@ -1,6 +1,6 @@
 ---
 - name: CONFIGURE CISCO SWITCH PORT
-  hosts: '{{ tower_network_inventory }}'
+  hosts: switch1
   connection: network_cli
   gather_facts: no
 
