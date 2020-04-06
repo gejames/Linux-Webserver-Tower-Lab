@@ -7,7 +7,7 @@ One of the benefits of Ansible and the Ansible Automation Platform is its abilit
 This lab was tested using Ansbile 2.9 and Tower 3.6.  It assumes you have the following
 
 - Ansible Tower 
-- [Tower CLI]{https://docs.ansible.com/ansible-tower/3.5.3/html/towerapi/tower_cli.html}
+- [Tower CLI](https://docs.ansible.com/ansible-tower/3.5.3/html/towerapi/tower_cli.html)
 - Centos 7 VM to similute our web server
 - Arista vEOS VM with at least three NICs to simulate our switch
 - Optional:  A gmail email address to send the report.
