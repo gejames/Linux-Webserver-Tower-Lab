@@ -7,20 +7,26 @@ One of the benefits of Ansible and the Ansible Automation Platform is its abilit
 This lab was tested using Ansbile 2.9 and Tower 3.6.  It assumes you have the following
 
 - Ansible Tower 
+- [Tower CLI]{https://docs.ansible.com/ansible-tower/3.5.3/html/towerapi/tower_cli.html}
 - Centos 7 VM to similute our web server
 - Arista vEOS VM with at least three NICs to simulate our switch
 - Optional:  A gmail email address to send the report.
 
 
-## Instalation
+## Installation
 
-In order to configure Tower, we will use the tower_lab_provision.yml playbook.   SSH into Tower or another Ansible server and clone this repo.
+1. In order to configure Tower, we will use the tower_lab_provision.yml playbook.   SSH into Tower or another Ansible server and clone this repo.
 
 ```
 git clone https://github.com/gejames/Linux-Webserver-Tower-Lab.git
 ```
 
-Edit the default variables in tower/vars/webdemo_tower.yml
+2. Edit the default variables in tower/vars/webdemo_tower.yml for your environment
+
+3. Run the playbook
+
+```
+ansible-playbook
 
 
 
