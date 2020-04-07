@@ -2,7 +2,7 @@
 ## Introduction
 One of the benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For instace, let's say a new webserver is required. In the past, the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer.   With Ansible Tower, we can coordinate these efforts into a single workflow.  This lab will demonstrate such a workflow by confiuging a switch port, performing an update on a CentOS server, installing a new admin user, installing NGINX, and finally emailing a report.  Playbooks are provided to configure Tower for the lab.  
 
-![Tower Workflow](./doc/workflow1.png)
+![Tower Workflow](docs/workflow1.png)
 
 
 ## Requirements
