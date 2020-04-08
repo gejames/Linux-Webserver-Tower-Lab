@@ -1,6 +1,8 @@
 # Linux Web Server Provisioning Workflow Lab
 ## Introduction
-One of the benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For instace, let's say a new webserver is required. In the past, the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer.   With Ansible Tower, we can coordinate these efforts into a single workflow.  This lab will demonstrate such a workflow by confiuging a switch port, performing an update on a CentOS server, installing a new admin user, installing NGINX, and finally emailing a report.  Playbooks are provided to configure Tower for the lab.  
+One of the benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For instace, let's say a new webserver is required. In the past, the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer.   With Ansible Tower, we can coordinate these efforts into a single workflow.  This lab will demonstrate such a workflow by configurinbg a switch port, performing an update on a CentOS server, installing NGINX, installing a new admin user, and finally emailing a report.  
+
+Playbooks are provided to configure Tower for the lab.  
 
 ![Tower Workflow](docs/workflow1.png)
 
@@ -26,7 +28,7 @@ git clone https://github.com/gejames/Linux-Webserver-Tower-Lab.git
 
 2. Edit the default variables in tower/vars/webdemo_tower.yml for your environment.  
 
-3. Run the playbook tower_lab_provision.yml on the Tower server.  It will ask for your Tower credentials. 
+3. Run the playbook tower_lab_provision.yml from CLI on the Tower server.  It will ask for your Tower credentials.  The provision playbook will configure all the assets necessary to complete the workflow.  This includes templates, surveys, credentials, projects, and inventories.   
 
 ```
 ansible-playbook tower_lab_provision.yml
@@ -34,10 +36,15 @@ ansible-playbook tower_lab_provision.yml
 
 Once the provisioning playbook is finished, Tower will be populated with the necesasry assests to launch the workflow
 
-![Job Templates](docs/templates1.png)
-
 ## Launching the Workflow
 
+We'll continue the lab from the Web UI of Tower.  Go to Templates and find the Linux Webdemo Workflow
+
+![Job Templates](docs/templates1.png)
+
+Press the rocket ship to launc the job
+
+![Rocketship](docs/rocketship.png)
 
 ## Reseting the lab
 
