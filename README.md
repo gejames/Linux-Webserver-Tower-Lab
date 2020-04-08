@@ -1,4 +1,4 @@
-# Web Server Provisioning Workflow Lab
+# Linux Web Server Provisioning Workflow Lab
 ## Introduction
 One of the benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For instace, let's say a new webserver is required. In the past, the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer.   With Ansible Tower, we can coordinate these efforts into a single workflow.  This lab will demonstrate such a workflow by confiuging a switch port, performing an update on a CentOS server, installing a new admin user, installing NGINX, and finally emailing a report.  Playbooks are provided to configure Tower for the lab.  
 
@@ -31,6 +31,10 @@ git clone https://github.com/gejames/Linux-Webserver-Tower-Lab.git
 ```
 ansible-playbook tower_lab_provision.yml
 ```
+
+Once the provisioning playbook is finished, Tower will be populated with the necesasry assests to launch the workflow
+
+![Job Templates](docs/templates1.png)
 
 ## Launching the Workflow
 
