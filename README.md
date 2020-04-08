@@ -42,7 +42,7 @@ We'll continue the lab from the Web UI of Tower.  Go to Templates and find the L
 
 ![Job Templates](docs/templates1.png)
 
-Press the rocket ship to launc the job
+Press the rocket ship to launch the job
 
 ![Rocketship](docs/rocketship.png)
 
