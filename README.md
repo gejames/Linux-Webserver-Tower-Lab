@@ -68,7 +68,7 @@ Tower will then present the variables it will use in the workflow.  Once you hav
 
 As the workflow progresses, their status indictator will turn green if they are succesful.   
 
-![Workflow2](doc/workflow2.png)
+![Workflow2](docs/workflow2.png)
 
 ---
 
