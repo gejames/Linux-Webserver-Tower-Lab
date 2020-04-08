@@ -64,3 +64,16 @@ Tower will then present the variables it will use in the workflow.  Once you hav
 
 ![Survey2](docs/survey2.png)
 
+---
+
+As the workflow progresses, their status indictator will turn green if they are succesful.   
+
+![Workflow2](doc/workflow2.png)
+
+---
+
+Press the Details link to see the details for each playbook.
+
+![Details](docs/details1.png)
+
+
