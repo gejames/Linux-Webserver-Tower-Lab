@@ -45,24 +45,11 @@ ansible-playbook tower_lab_provision.yml
 
 ## Launching the Workflow
 
-We'll continue the lab from the Web UI of Tower.  Go to Templates and find the new workflow.
+We'll continue the lab from the Web UI of Tower.  Login to Tower and go to Templates to find the new workflow.
 
 ![Job Templates](docs/templates1.png)
 
 Press the rocket ship to launch the job
 
 ![Rocketship](docs/rocketship.png)
-
-
-
-## Reseting the lab
-
-
-
-
-
-
-
-
-
 
