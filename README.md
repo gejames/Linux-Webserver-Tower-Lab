@@ -49,14 +49,17 @@ We'll continue the lab from the Web UI of Tower.  Login to Tower and go to Templ
 
 ![Job Templates](docs/templates1.png)
 
+---
 Press the rocket ship to launch the job
 
 ![Rocketship](docs/rocketship.png)
 
+---
 Once the job launches, you will be presented with a survey. Tower surveys allow administrators to query users for variable data.  This allows even non-technical users to launch powerful Ansible playbooks.  Leave the defaults for now and press Next.
 
 ![Survey1](docs/survey1.png)
 
+---
 Tower will then present the variables it will use in the workflow.  Once you have reviewed the variables and are satisfied they are correct, press Launch
 
 ![Survey2](docs/survey2.png)
