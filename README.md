@@ -6,7 +6,7 @@ In a production environment there would be many steps to bring a new server into
 
 ## Workflows
 
-A workflow consists of individual job that can be grouped together with logical branches. We can also add a Project Sync that will make sure we have all the latest copies of our playbook from github, or other version control system.
+A workflow consists of individual jobs that can be grouped together with logical branches. We can also add a Project Sync that will make sure we are using all the latest copies of our playbooks from github, or other version control system.
 
 Take a moment to review the workflow below.  A green line signifies success.  Red means failure.  And blue means always.  If our playbook to upgrade the server is successful, then we proceed to install NGINX. If it fails, we disable the switchport so an administrator can go in and find the problem.
 
