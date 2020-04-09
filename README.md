@@ -61,7 +61,7 @@ Press the rocket ship to launch the job.
 ![Rocketship](docs/rocketship.png)
 
 ---
-Once the job launches, you will be presented with a survey. Tower surveys allow administrators to query users for variable data.  This allows even non-technical users to launch powerful Ansible playbooks.  Enter a password the new admin user and your report email password.  Leave the others as defaults for now and press Next.
+Once the job launches, you will be presented with a survey. Tower surveys allow administrators to query users for variable data.  This allows even non-technical users to launch powerful Ansible playbooks.  Enter a password for the new admin user and your report email password.  Leave the others as defaults for now and press Next.
 
 ![Survey1](docs/survey1.png)
 
