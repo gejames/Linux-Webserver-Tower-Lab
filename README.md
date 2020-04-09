@@ -1,14 +1,14 @@
 # Ansible Tower Workflow Lab
 ## Introduction
-One of the many benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For example, let's say a new webserver is required. In the past the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer. Even if each team is automating some or all of their tasks, they are doing so in silos.  They may use different tools with different processes. With Ansible Tower, we can combine these efforts into a single workflow so that all the teams speak the same automation language.
+One of the many benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT organization.  For example, let's say a new web server is required. In the past the server team would be notified and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switch ports, opening firewall rules, or setting up a load balancer. Even if each team is automating some or all of their tasks, they are doing so in silos.  They may use different tools with different processes. With Ansible Tower, we can combine these efforts into a single workflow so that all the teams speak the same automation language.
 
-In a production environment there would be many steps to bring a new server into production, but for demo purposes we'll keep the list short.  We will configure a switch port, performe an update to a CentOS server, install NGINX, add a new admin user, and finally emaili a report.  
+In a production environment there would be many steps to bring a new server into production, but for demo purposes we'll keep the list short.  We will configure a switch port, perform an update to a CentOS server, install NGINX, add a new admin user, and finally email a report.  
 
 ## Workflows
 
-A workflow consists of individual job tempaltes that can be grouped together with logical branches. We can also add a Project Sync that will make sure we have all the latest copies of our playbook from github, or other version control system.
+A workflow consists of individual job that can be grouped together with logical branches. We can also add a Project Sync that will make sure we have all the latest copies of our playbook from github, or other version control system.
 
-Take a monemnt to review the workflow below.  A green line signifies success.  Red means failure.  And blue means always.  If our playbook to upgrade the server is successful, then we proceed to install NGINX. If it fails, we disable the switchport so an administrator can go in and find the problem.
+Take a moment to review the workflow below.  A green line signifies success.  Red means failure.  And blue means always.  If our playbook to upgrade the server is successful, then we proceed to install NGINX. If it fails, we disable the switchport so an administrator can go in and find the problem.
 
 ![Tower Workflow](docs/workflow1.png)
 
@@ -41,13 +41,13 @@ git clone https://github.com/gejames/Linux-Webserver-Tower-Lab.git && cd Linux-W
 vim tower/vars/webdemo_tower.yml
 ```
 
-3. Run the playbook tower_lab_provision.yml from the CLI on the Tower server.  It will ask for your Tower credentials.  The provision playbook will configure all the assets necessary to complete the workflow.  This includes templates, surveys, credentials, projects, and inventories.   
+3. Run the playbook tower_lab_provision.yml from the CLI on the Tower server. It will ask for your Tower credentials. The provision playbook will configure all the necessary assets to complete the workflow. This includes templates, surveys, credentials, projects, and inventories.   
 
 ```
 ansible-playbook tower_lab_provision.yml
 ```
 
-   Once the provisioning playbook is finished, Tower will be populated with the necesasry assests to launch the workflow
+   Once the provisioning playbook is finished, Tower will be populated with the necesasry assests to launch the workflow.
 
 ## Launching the Workflow
 
@@ -56,7 +56,7 @@ We'll continue the lab from the Web UI of Tower.  Login to Tower and go to Templ
 ![Job Templates](docs/templates1.png)
 
 ---
-Press the rocket ship to launch the job
+Press the rocket ship to launch the job.
 
 ![Rocketship](docs/rocketship.png)
 
