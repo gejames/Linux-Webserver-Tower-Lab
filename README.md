@@ -1,8 +1,10 @@
 # Ansible Tower Workflow Lab
 ## Introduction
-One of the many benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For instace, let's say a new webserver is required. In the past the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer.   With Ansible Tower, we can coordinate these efforts into a single workflow.  
+One of the many benefits of Ansible and the Ansible Automation Platform is its ability to automate across departments in your IT oranziation.  For example, let's say a new webserver is required. In the past the server team would be notifed and would begin provisioning the new server.  The network team would also be notified to begin its process of configuring switchports, opening firewall rules, or setting up a load balancer. Even if each team is automating some or all of their tasks, they are doing so in silos.  They may use different tools with different processes. With Ansible Tower, we can combine these efforts into a single workflow so that all the teams speak the same automation language.
 
-This lab will demonstrate this by configuring a switch port, performing an update to a CentOS server, installing NGINX, adding a new admin user, and finally emailing a report.  In a production environment there would be many more steps, but for demo purposes we'll keep the list short.
+In a production environment there would be many steps to bring a new server into production, but for demo purposes we'll keep the list short.  We will configure a switch port, performe an update to a CentOS server, install NGINX, add a new admin user, and finally emaili a report.  
+
+## Workflows
 
 A workflow consists of individual job tempaltes that can be grouped together with logical branches. We can also add a Project Sync that will make sure we have all the latest copies of our playbook from github, or other version control system.
 

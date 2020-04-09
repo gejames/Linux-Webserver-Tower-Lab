@@ -1,6 +1,7 @@
 # This playbook will create all the assests in Ansible Tower for the lab.
-
 # Edit the variables in tower/vars/webdemo_tower.yml
+# This is a bit long for a single playbook and should be broken up into smaller chuncks.
+
 
 ---
 - name: SETUP TOWER FOR DEMO
