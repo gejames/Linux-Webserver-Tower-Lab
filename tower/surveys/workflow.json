@@ -37,7 +37,7 @@
       "new_question": true
     },
     {
-      "question_name": "WHAT IS THE HOSTNAME OF THE WEBSERVER",
+      "question_name": "WHAT IS THE HOSTNAME OF THE WINDOWS WEBSERVER",
       "question_description": "",
       "required": true,
       "type": "text",
